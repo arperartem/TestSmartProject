@@ -29,9 +29,8 @@ namespace SelectBoosterPopup.BoosterPoolManager
             _factoryUiView = factoryUiView;
         }
         
-        public void Initialize(BoosterType[] initialBoosters, SelectBoosterView prefab, Transform containerBoosters)
+        public void Initialize(BoosterType[] initialBoosters, Transform containerBoosters)
         {
-            _prefab = prefab;
             _containerBoosters = containerBoosters;
             _boosterPool.Clear();
             _boosterViewMap.Clear();
@@ -64,7 +63,7 @@ namespace SelectBoosterPopup.BoosterPoolManager
             }
             else
             {
-                boosterView = _factoryUiView.Create(_prefab, _containerBoosters);
+                boosterView = _factoryUiView.Create<SelectBoosterView>(_containerBoosters);
                 boosterView.Initialize(boosterData.Sprite, () => OnBoosterClick(boosterType));
                 _boosterPool.Add(boosterView);
             }

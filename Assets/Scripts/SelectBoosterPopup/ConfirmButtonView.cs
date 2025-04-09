@@ -21,13 +21,13 @@ namespace SelectBoosterPopup
             animator.enabled = false;
         }
 
-        internal void PlayShowAnimation()
+        public void PlayShowAnimation()
         {
             transform.localScale = Vector3.zero;
             transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutElastic);
         }
 
-        internal void PlayTapAnimation(Action callback)
+        public void PlayTapAnimation(Action callback)
         {
             animator.enabled = true;
             _callback = callback;

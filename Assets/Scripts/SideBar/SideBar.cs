@@ -38,7 +38,7 @@ namespace SideBar
         {
             for (int i = 0; i < AmountCells; i++)
             {
-                var cellView = _factoryUiView.Create(_view.CellPrefab, _view.VerticalLayout.transform);
+                var cellView = _factoryUiView.Create<CellView>(_view.VerticalLayout.transform);
                 
                 if(i < AmountOpenCells)
                     cellView.SetOpen();

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Data;
 
-namespace Booster
+namespace Core
 {
     public static class GeneralExtensions
     {

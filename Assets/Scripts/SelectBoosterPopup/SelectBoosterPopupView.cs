@@ -8,16 +8,14 @@ namespace SelectBoosterPopup
 {
     public class SelectBoosterPopupView : MonoBehaviour
     {
-        internal event Action<ButtonType> ClickedButton;
+        public event Action<ButtonType> ClickedButton;
         
         [SerializeField] private SelectBoosterView[] boosters;
         [SerializeField] private ConfirmButtonView confirmButton;
         [SerializeField] private Button refreshButton;
         [SerializeField] private OnceHorizontalLayout containerBoosters;
-        [SerializeField] private SelectBoosterView selectBoosterPrefab;
         
         public OnceHorizontalLayout ContainerBoosters => containerBoosters;
-        public SelectBoosterView SelectBoosterPrefab => selectBoosterPrefab;
 
         public ConfirmButtonView ConfirmButton => confirmButton;
         public Button RefreshButton => refreshButton;
@@ -28,7 +26,7 @@ namespace SelectBoosterPopup
             confirmButton.Button.onClick.AddListener(() => ClickedButton?.Invoke(ButtonType.Confirm));
         }
 
-        internal void PlayRefreshButtonAnimation()
+        public void PlayRefreshButtonAnimation()
         {
             refreshButton.DOKill();
             refreshButton.transform.rotation = Quaternion.Euler(Vector3.zero);

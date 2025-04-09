@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using DG.Tweening;
 using Particles;
+using SelectBoosterPopup.BoosterFly;
 using SideBar;
 using UnityEngine;
 using UpperPanel;
@@ -13,17 +14,21 @@ namespace SelectBoosterPopup
         private readonly ISideBar _sideBar;
         private readonly IParticlePlayer _particlePlayer;
         private readonly IUpperPanel _upperPanel;
+        private readonly BoosterFlyManager _boosterFlyManager;
+        private readonly Camera _camera;
 
         public SelectBoosterFlow(ICellHolder cellHolder, ISideBar sideBar, IParticlePlayer particlePlayer,
-            IUpperPanel upperPanel)
+            IUpperPanel upperPanel, BoosterFlyManager boosterFlyManager, Camera camera)
         {
             _cellHolder = cellHolder;
             _sideBar = sideBar;
             _particlePlayer = particlePlayer;
             _upperPanel = upperPanel;
+            _boosterFlyManager = boosterFlyManager;
+            _camera = camera;
         }
 
-        internal IEnumerator SelectedBoosterFlow(SelectBoosterView selectedBoosterView)
+        public IEnumerator SelectedBoosterFlow(SelectBoosterView selectedBoosterView)
         {
             yield return new WaitForSeconds(0.3f);
 
@@ -37,25 +42,33 @@ namespace SelectBoosterPopup
 
             selectedBoosterView.SetPicked(true); //show checkmark
 
-            var starsParticle = _particlePlayer.PlayStarsParticle(); //show particles
+            var starsParticle = _particlePlayer.PlayParticle(ParticleType.SelectBooster,
+                _camera.ScreenToWorldPoint(selectedBoosterView.Root.position)); //show particles
 
             if (starsParticle.IsAlive)
                 yield return new WaitUntil(() => starsParticle.IsAlive == false); //wait finish particles
 
-            if (_sideBar.IsVisible == false) 
+            if (_sideBar.IsVisible == false)
                 _sideBar.SetVisible(true); //show side bar
 
             var cell = _cellHolder.GetFirstAvailableCell();
 
-            cell.Icon.SetAlpha(1f);
-            cell.Icon.sprite = selectedBoosterView.Icon.sprite;
-            cell.Icon.rectTransform.sizeDelta = selectedBoosterView.Root.sizeDelta;
-            cell.Icon.transform.position = selectedBoosterView.transform.position;
             selectedBoosterView.gameObject.SetActive(false);
-            cell.PlayFly();
 
-            yield return new WaitForSeconds(1f);
+            var completeFly = false;
 
+            _boosterFlyManager.PlayBoosterFly(selectedBoosterView.Root, cell.Icon.rectTransform,
+                selectedBoosterView.Icon.sprite, selectedBoosterView.transform.parent, () =>
+                {
+                    cell.ShowIcon(selectedBoosterView.Icon.sprite);
+                    completeFly = true;
+                });
+
+            yield return new WaitUntil(() => completeFly);
+
+            _particlePlayer.PlayParticle(ParticleType.SideCell,
+                _camera.ScreenToWorldPoint(cell.Icon.transform.position)); //show particles
+            
             _sideBar.SetVisible(false);
             _upperPanel.Hide();
         }

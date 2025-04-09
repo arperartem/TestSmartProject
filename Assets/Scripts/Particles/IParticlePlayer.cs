@@ -1,9 +1,10 @@
 ﻿using CommonUI;
+using UnityEngine;
 
 namespace Particles
 {
     public interface IParticlePlayer
     {
-        ParticleView PlayStarsParticle();
+        ParticleView PlayParticle(ParticleType type, Vector3 position);
     }
 }

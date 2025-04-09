@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Booster;
+using Core;
 using Data;
 using SelectBoosterPopup.BoosterPoolManager;
 using UnityEngine;
@@ -45,7 +46,7 @@ namespace SelectBoosterPopup
         {
             _lastSetBoosterTypes = DefaultBoosterTypes;
 
-            _boosterPoolManager.Initialize(DefaultBoosterTypes, _view.SelectBoosterPrefab,
+            _boosterPoolManager.Initialize(DefaultBoosterTypes,
                 _view.ContainerBoosters.transform);
             
             _view.ContainerBoosters.ReBuild();
@@ -133,7 +134,7 @@ namespace SelectBoosterPopup
         }
     }
 
-    internal enum ButtonType
+    public enum ButtonType
     {
         Refresh,
         Confirm

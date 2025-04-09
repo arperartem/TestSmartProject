@@ -1,31 +1,26 @@
 ﻿using System;
+using CommonUI;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace SideBar
 {
-    public class CellView : MonoBehaviour, ICellView
+    public class CellView : ViewUi, ICellView
     {
-        [SerializeField] private RectTransform backCell;
+        [SerializeField] private Image backCell;
         [SerializeField] private Image icon;
         [SerializeField] private Image lockIcon;
         
         public Image Icon => icon;
 
-        private Vector3 _cachePosition;
-        private Vector2 _cacheSizeDelta;
-        
-        private void Awake()
+        public void ShowIcon(Sprite sprite)
         {
-            _cachePosition = transform.position;
-            _cacheSizeDelta = icon.rectTransform.sizeDelta;
-        }
-
-        public void PlayFly()
-        {
-            icon.transform.DOJump(_cachePosition, 5f, 1, 1f).SetEase(Ease.InCubic);
-            icon.rectTransform.DOSizeDelta(_cacheSizeDelta, 1f).SetDelay(0.1f).SetEase(Ease.OutBack);
+            icon.sprite = sprite;
+            icon.SetAlpha(1f);
+            icon.transform.localScale = Vector3.zero;
+            icon.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
+            backCell.SetAlpha(0f);
         }
 
         public void SetOpen()

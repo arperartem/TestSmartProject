@@ -1,8 +1,10 @@
 ﻿using Booster;
+using CommonUI;
 using Core;
 using Data;
 using Particles;
 using SelectBoosterPopup;
+using SelectBoosterPopup.BoosterFly;
 using SelectBoosterPopup.BoosterPoolManager;
 using SideBar;
 using UnityEngine;
@@ -13,8 +15,11 @@ namespace DI
 {
     public class SampleSceneInstaller : MonoInstaller<SampleSceneInstaller>
     {
+        [SerializeField] private Camera mainCamera;
+        
         [SerializeField] private BoosterData[] boostersData;
-
+        [SerializeField] private ViewUi[] prefabs;
+        
         [SerializeField] private SelectBoosterPopupView selectBoosterPopupView;
         [SerializeField] private SideBarView sideBarView;
         [SerializeField] private ParticleHolderView particleHolderView;
@@ -22,6 +27,10 @@ namespace DI
         
         public override void InstallBindings()
         {
+            Container.BindInstance(mainCamera);
+            
+            Container.BindInstance(new PoolPrefab(prefabs));
+            
             Container.BindInstance(boostersData);
             Container.Bind<IParticlePlayer>().FromInstance(particleHolderView);
             Container.Bind<IUpperPanel>().FromInstance(upperPanelView);
@@ -35,6 +44,7 @@ namespace DI
             Container.Bind<SelectBoosterFlow>().AsSingle();
             
             Container.BindInterfacesTo<BoosterPoolManager>().AsSingle();
+            Container.Bind<BoosterFlyManager>().AsSingle();
         }
     }
 }

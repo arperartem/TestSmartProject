@@ -9,7 +9,7 @@ namespace SelectBoosterPopup.BoosterPoolManager
     {
         event Action SelectBoosterChanged;
         List<SelectBoosterView> BoosterPool { get; }
-        void Initialize(BoosterType[] initialBoosters, SelectBoosterView prefab, Transform containerBoosters);
+        void Initialize(BoosterType[] initialBoosters, Transform containerBoosters);
         void UpdateBoosters(BoosterType[] newBoosters);
         SelectBoosterView SelectedBooster { get; }
     }

@@ -5,12 +5,6 @@ namespace CommonUI
 {
     public class OnceHorizontalLayout : HorizontalLayoutGroup
     {
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            //StartCoroutine(InternalUpdate());
-        }
-
         public void ReBuild()
         {
             enabled = true;

@@ -1,4 +1,5 @@
 ﻿using System;
+using CommonUI;
 using Data;
 using DG.Tweening;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 
 namespace SelectBoosterPopup
 {
-    public class SelectBoosterView : MonoBehaviour
+    public class SelectBoosterView : ViewUi
     {
         private Action _callback;
         

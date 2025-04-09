@@ -1,11 +1,11 @@
-﻿using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace SideBar
 {
     public interface ICellView
     {
         Image Icon { get; }
-
-        void PlayFly();
+        void ShowIcon(Sprite sprite);
     }
 }
