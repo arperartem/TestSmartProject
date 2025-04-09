@@ -15,8 +15,10 @@ namespace SideBar
         private readonly FactoryUiView _factoryUiView;
 
         private bool _isVisible = true;
+        private Tween _moveTween;
 
         public bool IsVisible => _isVisible;
+        public bool IsAnimating => _moveTween.IsActive() && _moveTween.IsPlaying();
 
         public List<ICellView> Cells { get; } = new(4);
        
@@ -59,12 +61,12 @@ namespace SideBar
 
         public void SetVisible(bool show)
         {
-            _view.DOKill();
+            _moveTween?.Kill();
 
             if (show)
                 _view.Panel.alpha = 1f;
             
-            _view.MoveContainer
+            _moveTween = _view.MoveContainer
                 .DOAnchorPosX(show ? _view.CacheBarPosX : 0f, 0.5f)
                 .SetEase(show ? Ease.OutBack : Ease.InBack)
                 .OnComplete(() =>

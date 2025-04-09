@@ -42,14 +42,17 @@ namespace SelectBoosterPopup
 
             selectedBoosterView.SetPicked(true); //show checkmark
 
-            var starsParticle = _particlePlayer.PlayParticle(ParticleType.SelectBooster,
+            var selectBoosterParticle = _particlePlayer.PlayParticle(ParticleType.SelectBooster,
                 _camera.ScreenToWorldPoint(selectedBoosterView.Root.position)); //show particles
 
-            if (starsParticle.IsAlive)
-                yield return new WaitUntil(() => starsParticle.IsAlive == false); //wait finish particles
+            if (selectBoosterParticle.IsAlive)
+                yield return new WaitUntil(() => selectBoosterParticle.IsAlive == false); //wait finish particles
 
             if (_sideBar.IsVisible == false)
+            {
                 _sideBar.SetVisible(true); //show side bar
+                yield return new WaitUntil(() => _sideBar.IsAnimating == false);
+            }
 
             var cell = _cellHolder.GetFirstAvailableCell();
 
@@ -57,6 +60,7 @@ namespace SelectBoosterPopup
 
             var completeFly = false;
 
+            //fly booster to available side bar cell
             _boosterFlyManager.PlayBoosterFly(selectedBoosterView.Root, cell.Icon.rectTransform,
                 selectedBoosterView.Icon.sprite, selectedBoosterView.transform.parent, () =>
                 {
@@ -65,9 +69,12 @@ namespace SelectBoosterPopup
                 });
 
             yield return new WaitUntil(() => completeFly);
-
-            _particlePlayer.PlayParticle(ParticleType.SideCell,
+            
+            var cellParticle = _particlePlayer.PlayParticle(ParticleType.SideCell,
                 _camera.ScreenToWorldPoint(cell.Icon.transform.position)); //show particles
+            
+            if (cellParticle.IsAlive)
+                yield return new WaitUntil(() => cellParticle.IsAlive == false); //wait finish particles
             
             _sideBar.SetVisible(false);
             _upperPanel.Hide();
