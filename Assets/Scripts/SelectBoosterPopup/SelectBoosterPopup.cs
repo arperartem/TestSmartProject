@@ -2,9 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Booster;
 using Core;
-using Data;
+using Core.Data;
 using SelectBoosterPopup.BoosterPoolManager;
 using UnityEngine;
 using Zenject;

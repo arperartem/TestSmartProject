@@ -1,6 +1,6 @@
 ﻿using System;
 using CommonUI;
-using Data;
+using Core.Data;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;

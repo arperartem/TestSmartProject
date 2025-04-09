@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Booster;
 using Core;
-using Data;
+using Core.Data;
 using UnityEngine;
 
 namespace SelectBoosterPopup.BoosterPoolManager

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Data;
+using Core.Data;
 
-namespace Booster
+namespace Core
 {
     public class BoosterDataHolder
     {

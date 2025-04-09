@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Data;
+using Core.Data;
 
 namespace Core
 {

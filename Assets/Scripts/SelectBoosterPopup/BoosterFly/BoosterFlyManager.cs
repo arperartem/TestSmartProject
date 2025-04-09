@@ -1,4 +1,5 @@
 ﻿using System;
+using CommonUI;
 using Core;
 using DG.Tweening;
 using UnityEngine;

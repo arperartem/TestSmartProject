@@ -1,7 +1,6 @@
-﻿using Booster;
-using CommonUI;
+﻿using CommonUI;
 using Core;
-using Data;
+using Core.Data;
 using Particles;
 using SelectBoosterPopup;
 using SelectBoosterPopup.BoosterFly;

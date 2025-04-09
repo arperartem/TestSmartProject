@@ -1,4 +1,4 @@
-﻿namespace Data
+﻿namespace Core.Data
 {
     public enum BoosterType
     {

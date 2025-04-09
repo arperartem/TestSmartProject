@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Data
+namespace Core.Data
 {
     [CreateAssetMenu(fileName = "BoosterData", menuName = "BoosterData", order = 0)]
     public class BoosterData : ScriptableObject
