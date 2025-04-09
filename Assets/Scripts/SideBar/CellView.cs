@@ -1,5 +1,4 @@
-﻿using System;
-using CommonUI;
+﻿using CommonUI;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;

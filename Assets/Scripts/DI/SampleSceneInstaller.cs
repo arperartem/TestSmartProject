@@ -29,21 +29,19 @@ namespace DI
             Container.BindInstance(mainCamera);
             
             Container.BindInstance(new PoolPrefab(prefabs));
-            
             Container.BindInstance(boostersData);
             Container.Bind<IParticlePlayer>().FromInstance(particleHolderView);
-            Container.Bind<IUpperPanel>().FromInstance(upperPanelView);
-
             Container.BindInterfacesAndSelfTo<BoosterDataHolder>().AsSingle();
+            Container.Bind<FactoryUiView>().AsSingle();
+            Container.Bind<SelectBoosterFlow>().AsSingle();
+            Container.BindInterfacesTo<BoosterPoolManager>().AsSingle();
+            Container.Bind<BoosterFlyManager>().AsSingle();
+            
+            //Bind ui
+            Container.Bind<IUpperPanel>().FromInstance(upperPanelView);
             Container.BindInterfacesTo<SelectBoosterPopup.SelectBoosterPopup>().AsSingle()
                 .WithArguments(selectBoosterPopupView).NonLazy();
             Container.BindInterfacesTo<SideBar.SideBar>().AsSingle().WithArguments(sideBarView).NonLazy();
-
-            Container.Bind<FactoryUiView>().AsSingle();
-            Container.Bind<SelectBoosterFlow>().AsSingle();
-            
-            Container.BindInterfacesTo<BoosterPoolManager>().AsSingle();
-            Container.Bind<BoosterFlyManager>().AsSingle();
         }
     }
 }

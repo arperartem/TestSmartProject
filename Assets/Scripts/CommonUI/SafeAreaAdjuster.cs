@@ -30,7 +30,7 @@ namespace CommonUI
         private void Update()
         {
 #if !UNITY_EDITOR
-            ApplySafeAreaIfChanged(); // В билде обновляем на лету
+            ApplySafeAreaIfChanged();
 #endif
         }
 
